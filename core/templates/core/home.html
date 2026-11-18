@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+Home | CampusConnect
+{% endblock %}
+
+{% block content %}
+
+<h2>Welcome, {{student_name}}!</h2>
+<p>University: {{university}}!</p>
+<p>Department: {{department}}</p>
+
+{% if is_enrolled %}
+<p>
+    Status: You are successfully enrolled
+</p>
+{% else %}
+<p>
+    Status: You are not enrolled yet.
+</p>
+{% endif %}
+
+<h3>
+    My Courses
+</h3>
+
+<ul>
+    {% for course in courses %}
+    <li>
+        {{ course }}
+    </li>
+    {% empty %}
+    <li>
+        No course available.
+    </li>
+    {% endfor %}
+</ul>
+
+<h3>
+    Registered Students
+</h3>
+
+<ul>
+    {% for student in students %}
+    <li>
+        {{student.name}} -
+        {{ Student.student_id }} -
+        {{ student.department }}
+
+        <a href="{% url 'update_student' student.id %}">
+            Edit
+        </a>
+
+        <a href="{% url 'delete_student' student.id %}">
+            Delete
+        </a>
+    </li>
+    {% empty %}
+
+    <li>No students registered yet.</li>
+
+    {% endfor %}
+</ul>
+
+<p>
+    <a href="{% url 'register_student' %}">
+        Register a New Student
+    </a>
+</p>
+
+{% endblock %}
