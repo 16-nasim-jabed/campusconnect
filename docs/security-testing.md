@@ -28,7 +28,9 @@
 | AUTHZ-03 | Send GET request to another user's delete confirmation endpoint | Access denied | HTTP 404 | PASS |
 | AUTHZ-04 | User updates own student record | Update successful | Redirected to home; database verified | PASS |
 | SESSION-01 | Logout invalidates current session | Session cookie removed | Cookie removed; session count decreased from 2 to 1 | PASS |
-
+| CSRF-01 | POST without CSRF token | Request rejected with HTTP 403 | HTTP 403 | PASS |
+| CSRF-02 | GET edit page to obtain CSRF cookie | CSRF cookie generated | HTTP 200; cookie present | PASS |
+| CSRF-03 | POST with valid CSRF token | Request passes CSRF middleware | HTTP 200; form validation reached | PASS |
 ## 4. Security Observations
 
 ### 4.1 Authentication Enforcement
